@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sitech.dao.DmAdpositionidLog1CustomMapper" >
+  <insert id="insert" parameterType="DmAdpositionidLog1Custom"  statementType="STATEMENT">
+  	insert into dm_adpositionid_log_1_${tableDateParam} (monitor_Req, res_id, 
+      info,hour,day,ts)
+    values ('${monitorReq}', '${res_id}', 
+      '${info}',STR_TO_DATE('${hourStr}','%Y%m%d%H'),STR_TO_DATE('${dayStr}','%Y%m%d%H'),'${ts}')
+  </insert>
+  
+  <insert id="deleteByHour" parameterType="DmAdpositionidLog1Custom"  statementType="STATEMENT">
+  	delete from  dm_adpositionid_log_1_${tableDateParam}  where DATE_FORMAT(hour,'%Y%m%d%H') = '${hourStr}' and DATE_FORMAT(day,'%Y%m%d') = '${dayStr}'
+  </insert>
+  
+</mapper>

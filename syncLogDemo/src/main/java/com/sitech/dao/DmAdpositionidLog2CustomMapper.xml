@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sitech.dao.DmAdpositionidLog2CustomMapper" >
+ 	<insert id="insert" parameterType="DmAdpositionidLog2Custom"  statementType="STATEMENT">
+  	 insert into dm_adpositionid_log_2_${tableDateParam} (monitor_Req, res_id, 
+      info, hour, DAY, type, 
+      type2, code, mo, ns, 
+      m1, m2, m3, m1a, 
+      m2a, m9, m9b, m1b, 
+      m1c, m9c, nx, user_Id, 
+      create_Time, CID, ADID, 
+      CRID, Media_Place_Id, TS, 
+      platform)
+    values ('${monitorReq}', '${resId}', 
+      '${info}',STR_TO_DATE('${hourStr}','%Y%m%d%H'),STR_TO_DATE('${dayStr}','%Y%m%d%H'), '${type}', 
+      '${type2}', '${code}', '${mo}', '${ns}', 
+      '${m1}', '${m2}', '${m3}', '${m1a}', 
+      '${m2a}', '${m9}', '${m9b}', '${m1b}', 
+      '${m1c}', '${m9c}', '${nx}', '${userId}', 
+      '${createTime}', '${cid}', '${adid}', 
+      '${crid}', '${mediaPlaceId}', '${ts}', 
+      '${platform}')
+    </insert>
+    
+   	<insert id="deleteByHour" parameterType="DmAdpositionidLog2Custom"  statementType="STATEMENT">
+  		delete from  dm_adpositionid_log_2_${tableDateParam} where DATE_FORMAT(hour,'%Y%m%d%H') = '${hourStr}' and DATE_FORMAT(day,'%Y%m%d') = '${dayStr}'
+  	</insert>
+    
+</mapper>

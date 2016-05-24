@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sitech.dao.DmReportAdpositionidNumCustomMapper" >
+  <insert id="insertGroupDataByDay" parameterType="DmReportAdpositionidNumCustom"  statementType="STATEMENT">
+  	INSERT INTO dm_report_adpositionid_num_${tableDateParam}(res_id,TYPE, num,total_num,DAY)
+SELECT a.res_id,b.type,COUNT(*),c.total_num,a.DAY FROM dm_adpositionid_log_1_${tableDateParam} a,dm_adpositionid_log_2_${tableDateParam} b,(SELECT COUNT(*) total_num,res_id FROM dm_adpositionid_log_1_${tableDateParam} WHERE  DATE_FORMAT(DAY,'%Y%m%d') = '${dayStr}'  GROUP BY res_id) c
+WHERE a.hour=b.hour AND a.DAY=b.DAY AND A.monitor_Req=B.monitor_Req  
+AND DATE_FORMAT(a.day,'%Y%m%d') = '${dayStr}' AND a.res_id=c.res_id  GROUP BY a.res_id,b.type,a.DAY
+  </insert>
+  
+  <insert id="deleteByDay" parameterType="DmReportAdpositionidNumCustom"  statementType="STATEMENT">
+  	delete from  dm_report_adpositionid_num_${tableDateParam} where DATE_FORMAT(day,'%Y%m%d') = '${dayStr}'
+  </insert>
+</mapper>
