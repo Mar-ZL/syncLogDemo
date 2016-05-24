@@ -36,6 +36,7 @@ public class SyncLogServiceImplTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		
 		applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");
 	}
 
